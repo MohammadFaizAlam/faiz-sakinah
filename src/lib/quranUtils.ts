@@ -1,4 +1,4 @@
-import type { AyahTiming, SurahChapter, WordSegment } from '../types/quran';
+import type { AyahTiming, SurahChapter, WordSegment } from '../types/quran.js';
 
 /**
  * Finds the active ayah index for a given playback position (in milliseconds)

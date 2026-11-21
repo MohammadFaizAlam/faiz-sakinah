@@ -1,7 +1,7 @@
 import express, { type Request, type Response, type Router } from 'express';
 import { gzip } from 'node:zlib';
 import { promisify } from 'node:util';
-import { sanitizeTranslationHtml } from '../lib/quranUtils';
+import { sanitizeTranslationHtml } from '../lib/quranUtils.js';
 import {
   asNumber,
   asString,
@@ -13,7 +13,7 @@ import {
   type SurahChapter,
   type SurahPayload,
   type TranslationMeta,
-} from '../types/quran';
+} from '../types/quran.js';
 
 const gzipAsync = promisify(gzip);
 const QURAN_API_BASE = 'https://api.quran.com/api/v4';

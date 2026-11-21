@@ -1,0 +1,172 @@
+@import "tailwindcss";
+
+@theme {
+  --color-navy-950: #070B16;
+  --color-navy-900: #0A0F1E;
+  --color-navy-850: #0D1325;
+  --color-navy-800: #0F1629;
+  --color-navy-750: #121A2F;
+  --color-navy-700: #151D33;
+  --color-silver-blue: #8FA3C7;
+  --color-silver-mist: #B7C6DF;
+  --color-cream: #ECE9E1;
+
+  --font-serif: "Cormorant Garamond", Georgia, "Times New Roman", serif;
+  --font-arabic: "Amiri Quran", "Scheherazade New", "Traditional Arabic", serif;
+  --font-sans: "DM Sans", -apple-system, BlinkMacSystemFont, sans-serif;
+}
+
+:root {
+  --bg-base: #0A0F1E;
+  --bg-surface-1: #0F1629;
+  --bg-surface-2: #151D33;
+  --accent: #8FA3C7;
+  --accent-soft: rgba(143, 163, 199, 0.16);
+  --border-hairline: rgba(143, 163, 199, 0.12);
+  --border-hairline-strong: rgba(143, 163, 199, 0.24);
+  --text-primary: #ECE9E1;
+  --text-muted: rgba(143, 163, 199, 0.68);
+  --text-subtle: rgba(143, 163, 199, 0.48);
+  --shadow-navy: 0 24px 60px -12px rgba(4, 7, 16, 0.72);
+  --glass-bg: rgba(15, 22, 41, 0.74);
+  --glass-bg-elevated: rgba(18, 26, 47, 0.84);
+}
+
+html,
+body {
+  height: 100%;
+  background-color: var(--bg-base);
+  color: var(--text-primary);
+  font-family: var(--font-sans);
+  overflow-x: hidden;
+}
+
+#root {
+  height: 100%;
+  background-color: transparent;
+}
+
+/* Luxury glass surface: enables blur on real GPUs, gracefully uses rich translucent navy on software WebGL */
+.glass-surface {
+  background-color: var(--glass-bg);
+  border: 1px solid var(--border-hairline);
+  box-shadow: var(--shadow-navy);
+  backdrop-filter: blur(18px) saturate(115%);
+  -webkit-backdrop-filter: blur(18px) saturate(115%);
+}
+
+.glass-surface-elevated {
+  background-color: var(--glass-bg-elevated);
+  border: 1px solid var(--border-hairline-strong);
+  box-shadow: var(--shadow-navy);
+  backdrop-filter: blur(22px) saturate(120%);
+  -webkit-backdrop-filter: blur(22px) saturate(120%);
+}
+
+[data-webgl-mode="software"] .glass-surface {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: rgba(13, 19, 37, 0.9);
+}
+
+[data-webgl-mode="software"] .glass-surface-elevated {
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  background-color: rgba(12, 18, 35, 0.97);
+}
+
+/* Subtle navy vignette behind the reading column so cream text meets WCAG AA while ribbons breathe */
+.reading-scrim {
+  background: radial-gradient(
+    ellipse 64% 58% at 52% 48%,
+    rgba(10, 15, 30, 0.32) 0%,
+    rgba(10, 15, 30, 0.14) 60%,
+    rgba(10, 15, 30, 0.02) 100%
+  );
+}
+
+/* Gentle edge scroll fade mask for the synced ayah theater (preserves full legibility on long ayahs) */
+.ayah-scroll-mask {
+  mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.92) 6%,
+    #000 12%,
+    #000 88%,
+    rgba(0, 0, 0, 0.92) 94%,
+    transparent 100%
+  );
+  -webkit-mask-image: linear-gradient(
+    to bottom,
+    transparent 0%,
+    rgba(0, 0, 0, 0.92) 6%,
+    #000 12%,
+    #000 88%,
+    rgba(0, 0, 0, 0.92) 94%,
+    transparent 100%
+  );
+}
+
+/* Calm custom scrollbars */
+.sanctuary-scroll {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(143, 163, 199, 0.22) transparent;
+}
+
+.sanctuary-scroll::-webkit-scrollbar {
+  width: 5px;
+  height: 5px;
+}
+
+.sanctuary-scroll::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.sanctuary-scroll::-webkit-scrollbar-thumb {
+  background-color: rgba(143, 163, 199, 0.22);
+  border-radius: 9999px;
+}
+
+.sanctuary-scroll::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(143, 163, 199, 0.38);
+}
+
+/* Arabic Quranic typography */
+.font-arabic {
+  font-family: var(--font-arabic);
+  font-feature-settings: "kern" 1, "liga" 1, "calt" 1;
+}
+
+.font-editorial {
+  font-family: var(--font-serif);
+  font-feature-settings: "kern" 1, "liga" 1;
+}
+
+/* Visible calm silver-blue focus ring for keyboard navigation */
+.focus-ring:focus-visible {
+  outline: 2px solid rgba(143, 163, 199, 0.85);
+  outline-offset: 2px;
+}
+
+/* Hide duplicate native WebKit search clear icon in favor of our custom accessible button */
+input[type="search"]::-webkit-search-cancel-button,
+input[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+/* WebGL fallback gradient when WebGL is unavailable or reduced-motion static mode */
+.silk-fallback-bg {
+  background:
+    radial-gradient(ellipse 80% 55% at 22% 28%, rgba(143, 163, 199, 0.16) 0%, transparent 62%),
+    radial-gradient(ellipse 70% 50% at 78% 68%, rgba(143, 163, 199, 0.13) 0%, transparent 60%),
+    linear-gradient(155deg, #070B16 0%, #0A0F1E 48%, #101930 100%);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
+  }
+}

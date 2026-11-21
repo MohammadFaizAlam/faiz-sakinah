@@ -1,0 +1,6 @@
+{
+  "name": "Sakinah — Qur'an Audio Sanctuary",
+  "description": "A calm, luxury Qur'an audio player with real-time ayah synchronization, dynamic reciters, and a reactive silver-blue WebGL silk backdrop.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
